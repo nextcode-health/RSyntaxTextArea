@@ -94,17 +94,22 @@ public final class SearchEngine {
 						Math.min(c.getDot(), c.getMark());
 
 		String findIn = getFindInText(textArea, start, forward);
+//		String findIn = textArea.getText();
 		if (findIn==null || findIn.length()==0) {
 			return new SearchResult();
 		}
 
 		int markAllCount = 0;
 		if (doMarkAll) {
-			markAllCount = markAllImpl((RTextArea)textArea, context).
-					getMarkedCount();
+			markAllCount = markAllImpl((RTextArea)textArea, context).getMarkedCount();
 		}
 
 		SearchResult result = SearchEngine.findImpl(findIn, context);
+//		if(!result.wasFound()) {
+//			textArea.setCaretPosition(0);
+//			findIn = getFindInText(textArea, 0, forward);
+//			result = SearchEngine.findImpl(findIn, context);
+//		}
 		if (result.wasFound() && !result.getMatchRange().isZeroLength()) {
 			// Without this, if JTextArea isn't in focus, selection
 			// won't appear selected.
